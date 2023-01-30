@@ -26,7 +26,7 @@ export class Modal extends Component {
 
     return createPortal(
       <Overlay onClick={closeModal}>
-        <ModalWindow>{children}</ModalWindow>
+        <ModalWindow close={closeModal}>{children}</ModalWindow>
       </Overlay>,
       modalRoot
     );
