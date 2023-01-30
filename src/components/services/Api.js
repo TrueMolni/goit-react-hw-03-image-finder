@@ -15,7 +15,7 @@ const instance = axios.create({
 
 axios.defaults.baseURL = BASE_URL;
 
-const getImages = async (q, page, perPage) => {
+const getImages = async (q, page) => {
   const { data } = await instance.get(`/`, {
     params: {
       q,

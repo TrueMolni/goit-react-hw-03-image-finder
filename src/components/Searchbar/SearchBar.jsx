@@ -1,5 +1,5 @@
-import axios from 'axios';
 import PropTypes from 'prop-types';
+import { FcSearch } from 'react-icons/fc';
 import { Component } from 'react';
 import {
   SearchHeader,
@@ -37,6 +37,7 @@ export default class SearchBar extends Component {
       <SearchHeader>
         <SearchForm onSubmit={handleSubmit}>
           <SearchBtn type="submit">
+            <FcSearch style={{ width: 22, height: 22 }} />
             <SearchBtnLabel>Search</SearchBtnLabel>
           </SearchBtn>
 

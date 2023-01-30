@@ -4,7 +4,8 @@ import Button from './Button';
 import SearchBar from './Searchbar';
 import ImageGallery from './ImageGallery';
 import getImages from './services/Api';
-import Modal from './Modal/Modal';
+import Modal from './Modal';
+import ModalDetails from './ModalDetails';
 
 import { Wrapper, Message } from './App.styled';
 
@@ -16,6 +17,8 @@ export default class App extends Component {
     search: '',
     page: 1,
     showModal: false,
+    // modalDetails: null,
+    largeImage: '',
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -44,21 +47,25 @@ export default class App extends Component {
     }));
   };
 
-  // searchImages = ({ search }) => {
-  //   this.setState({ search, items: [], page: 1 });
+  searchImages = ({ search }) => {
+    this.setState({ search, items: [], page: 1 });
+  };
+
+  // showLargeImg = ({ largeImageURL }) => {
+  //   this.setState({ modalDetails: { largeImageURL }, showModal: true });
   // };
 
-  // getLargeImg = largeImageURL => {
-  //   this.setState({ showModal: true, largeImageURL: largeImageURL });
-  // };
+  getLargeImg = ({ largeImageURL }) => {
+    this.setState({ showModal: true, largeImage: largeImageURL });
+  };
 
-  // onCloseModal = () => {
-  //   this.setState({ showModal: false });
-  // };
+  onCloseModal = () => {
+    this.setState({ showModal: false, largeImage: '' });
+  };
 
   render() {
-    const { items, loading, error, showModal } = this.state;
-    const { loadMore, searchImages } = this;
+    const { items, loading, error, showModal, largeImage } = this.state;
+    const { loadMore, searchImages, getLargeImg, onCloseModal } = this;
     console.log(items);
 
     return (
@@ -69,11 +76,15 @@ export default class App extends Component {
           <Message>Something goes wrong. Please try again later.</Message>
         )}
 
-        <ImageGallery items={items} />
+        <ImageGallery items={items} getLargeImg={getLargeImg} />
         {Boolean(items.length) && (
           <Button text="Load more" onClick={loadMore}></Button>
         )}
-        {showModal && <Modal></Modal>}
+        {showModal && (
+          <Modal close={onCloseModal}>
+            <ModalDetails largeImageURL={largeImage} />
+          </Modal>
+        )}
       </Wrapper>
     );
   }

@@ -2,10 +2,11 @@ import PropTypes from 'prop-types';
 import ImageGalleryItem from 'components/ImageGalleryItem/ImageGalleryItem';
 import { GalleryList } from './ImageGallery.styled';
 
-export default function ImageGallery({ items }) {
+export default function ImageGallery({ items, getLargeImg }) {
   const elements = items.map(({ id, webformatURL, largeImageURL }) => {
     return (
       <ImageGalleryItem
+        getLargeImg={getLargeImg}
         key={id}
         webformatURL={webformatURL}
         largeImageURL={largeImageURL}
