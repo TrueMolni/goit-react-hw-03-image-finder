@@ -17,7 +17,6 @@ export default class App extends Component {
     search: '',
     page: 1,
     showModal: false,
-    // modalDetails: null,
     largeImage: '',
   };
 
@@ -48,6 +47,9 @@ export default class App extends Component {
   };
 
   searchImages = ({ search }) => {
+    if (search.length === 0) {
+      return;
+    }
     this.setState({ search, items: [], page: 1 });
   };
 
@@ -66,7 +68,6 @@ export default class App extends Component {
   render() {
     const { items, loading, error, showModal, largeImage } = this.state;
     const { loadMore, searchImages, getLargeImg, onCloseModal } = this;
-    console.log(items);
 
     return (
       <Wrapper>
